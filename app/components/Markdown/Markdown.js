@@ -1,31 +1,44 @@
 'use client'
 import { useState } from "react";
 import Markdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 
 
 
 const MarkdownComponent = () => {
     const [title, setTitle] = useState("Hello")
 
+    const copyImgToClipboard = async (animal)=> {
+        const URL = `https://www.js-craft.io/_public-files/img-cat.png`
+        console.log('test')
+        try {
+            const copiedImage = await fetch(URL)
+            const blobData = await copiedImage.blob()
+            const clipboardItemInput = new ClipboardItem({'image/png' : blobData})
+            navigator.clipboard.write([clipboardItemInput])
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
     const markdown = (`
+![](https://content.codecademy.com/courses/learn-cpp/community-challenge/highfive.gif)
 ### Parameters
-**\`🌎 Map:\`** Italy
-**\`Record Category\`**   **::**  \`Precision\`
-
-**\`SpawnCycle\`**   **::**asl_v3  
-**\`Max Monsters\`**   **::**   
-**\`ZED Type\`**   **::**   Vanilla 
-
+**\`🌎 Map:\` Italy
+**\`🏆 Record Category:\` 🎯 Precision
+**\`♻️ SpawnCycle:\`** asl_v3  
+**\`😈 Max Monsters:\`** 64
+**\`💪 ZED Type:\`** Vanilla
 **\`Start Time\`**   **::**   <t:1699488000:t>
-
-**\`Server Info\`**
-**Whitelist US**
-\`open 74.91.113.4:6999?password=nkmeqi039X!6ZPH8\`
-**Whitelist EU**   |  \`open 51.89.23.180:6999?password=nkmeqi039X!6ZPH8\`
-**Match**   |   US #1  -  \`open 74.91.119.229:7020\`
-
-**\` Confirmed Roster\`**
-*Those who are signed up to play.*
+### Whitelist US (Click to Copy)
+\`\`\`md
+open 74.91.113.4:6999?password=nkmeqi039X!6ZPH8
+\`\`\`
+### Server (Click to Copy)
+\`\`\`md
+open 74.91.119.229:7020
+\`\`\`
+### Players
 \`\`\`md
 Gwemwin
 ------
@@ -34,25 +47,25 @@ Gwemwin
 ------
 ------
 \`\`\`
-**\` Backup Roster\`**
-*Those who can tentatively join or are willing to join if someone in the main list can't make it.*
+### Backup
 \`\`\`md
 ------
 ------
 ------
-(add more as necessary)
 \`\`\`
 `
 )
   return (
     <>
-  <Markdown>
+  <Markdown remarkPlugins={[remarkGfm]}>
     {markdown}
   </Markdown>
   <button className="btn btn-outline btn-info" onClick={() => {navigator.clipboard.writeText(markdown)}}>
     Copy to Clipboard
   </button>
-
+  <button className="btn btn-outline btn-info" onClick={copyImgToClipboard}>
+    Copy to Image
+  </button>
     </>
   )
 }
