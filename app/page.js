@@ -1,11 +1,11 @@
+import Form from "./components/Form";
 import MarkdownComponent from "./components/Markdown/Markdown";
 
 
 export default function Home() {
-
   return (
-    <div className="container mx-auto p-4">
-      <MarkdownComponent/>
-    </div>
+    <>
+    <Form/>
+    </>
   );
 }

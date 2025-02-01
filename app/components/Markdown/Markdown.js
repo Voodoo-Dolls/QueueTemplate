@@ -1,27 +1,25 @@
-'use client'
+"use client";
 import { useState } from "react";
 import Markdown from "react-markdown";
-import remarkGfm from 'remark-gfm'
-
-
+import remarkGfm from "remark-gfm";
 
 const MarkdownComponent = () => {
-    const [title, setTitle] = useState("Hello")
+  const [title, setTitle] = useState("Hello");
 
-    const copyImgToClipboard = async (animal)=> {
-        const URL = `https://www.js-craft.io/_public-files/img-cat.png`
-        console.log('test')
-        try {
-            const copiedImage = await fetch(URL)
-            const blobData = await copiedImage.blob()
-            const clipboardItemInput = new ClipboardItem({'image/png' : blobData})
-            navigator.clipboard.write([clipboardItemInput])
-        } catch(e) {
-            console.log(e)
-        }
+  const copyImgToClipboard = async (animal) => {
+    const URL = `https://www.js-craft.io/_public-files/img-cat.png`;
+    console.log("test");
+    try {
+      const copiedImage = await fetch(URL);
+      const blobData = await copiedImage.blob();
+      const clipboardItemInput = new ClipboardItem({ "image/png": blobData });
+      navigator.clipboard.write([clipboardItemInput]);
+    } catch (e) {
+      console.log(e);
     }
+  };
 
-    const markdown = (`
+  const markdown = `
 ### Parameters
 **\`🌎 Map:\` Italy
 **\`🏆 Record Category:\` 🎯 Precision
@@ -52,20 +50,22 @@ Gwemwin
 ------
 ------
 \`\`\`
-`
-)
+`;
   return (
     <>
-  <Markdown remarkPlugins={[remarkGfm]}>
-    {markdown}
-  </Markdown>
-  <button className="btn btn-outline btn-info" onClick={() => {navigator.clipboard.writeText(markdown)}}>
-    Copy to Clipboard
-  </button>
-  <button className="btn btn-outline btn-info" onClick={copyImgToClipboard}>
-    Copy to Image
-  </button>
+      <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
+      <button
+        className="btn btn-outline btn-info"
+        onClick={() => {
+          navigator.clipboard.writeText(markdown);
+        }}
+      >
+        Copy to Clipboard
+      </button>
+      <button className="btn btn-outline btn-info" onClick={copyImgToClipboard}>
+        Copy to Image
+      </button>
     </>
-  )
-}
-export default MarkdownComponent
+  );
+};
+export default MarkdownComponent;
