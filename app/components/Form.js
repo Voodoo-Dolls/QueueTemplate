@@ -14,15 +14,15 @@ const Form = () => {
   return (
     <>
       <div className="container mx-auto lg:flex gap-4 p-4">
-        <div class="relative z-0 w-full mb-5 group">
+        <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
             name="title"
-            class="peer"
+            className="peer"
             placeholder=""
             onChange={(e) => setTitle(e.target.value)}
           />
-          <label for="floating_email">Queue Title</label>
+          <label htmlFor="title">Queue Title</label>
         </div>
 
         <div className="lg:w-1/2">
