@@ -22,7 +22,6 @@ const MarkdownComponent = () => {
     }
 
     const markdown = (`
-![](https://content.codecademy.com/courses/learn-cpp/community-challenge/highfive.gif)
 ### Parameters
 **\`🌎 Map:\` Italy
 **\`🏆 Record Category:\` 🎯 Precision
