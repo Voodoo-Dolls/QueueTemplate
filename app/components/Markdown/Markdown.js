@@ -53,7 +53,18 @@ Gwemwin
 `;
   return (
     <>
-      <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
+      <div className="container p-4 flex">
+        {/* PROFILE */}
+        <div></div>
+        {/* Message */}
+        <div>
+          <h1 className="mt-[8px] text-[1.5rem] font-bold">Match Paremeters</h1>
+          <strong>
+            <code>🌎 Map</code>
+          </strong>
+        </div>
+      </div>
+      {/* <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
       <button
         className="btn btn-outline btn-info"
         onClick={() => {
@@ -64,7 +75,7 @@ Gwemwin
       </button>
       <button className="btn btn-outline btn-info" onClick={copyImgToClipboard}>
         Copy to Image
-      </button>
+      </button> */}
     </>
   );
 };
