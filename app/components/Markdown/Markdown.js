@@ -7,7 +7,7 @@ const MarkdownComponent = () => {
   const [title, setTitle] = useState("Hello");
 
   const copyImgToClipboard = async (animal) => {
-    const URL = `https://www.js-craft.io/_public-files/img-cat.png`;
+    const URL = `https://imgur.com/FR5oBYW`;
     console.log("test");
     try {
       const copiedImage = await fetch(URL);
@@ -20,35 +20,36 @@ const MarkdownComponent = () => {
   };
 
   const markdown = `
-### Parameters
-**\`🌎 Map:\` Italy
-**\`🏆 Record Category:\` 🎯 Precision
-**\`♻️ SpawnCycle:\`** asl_v3  
-**\`😈 Max Monsters:\`** 64
-**\`💪 ZED Type:\`** Vanilla
-**\`Start Time\`**   **::**   <t:1699488000:t>
-### Whitelist US (Click to Copy)
+# Match Parameters
+**\`🌎 Map\`**   **::**   Any
+**\`🏆 Record Category\`**   **::**   \`⌛ Classic\`
+**\`♻️ SpawnCycle\`**   **::**   Any
+**\`😈 Max Monsters\`**   **::**   Any
+**\`💪 ZED Type\`**   **::**   Vanilla
+**\`🕐 Start Time\`**   **::**   In at least 30 minutes
+  
+# Server Information 
+**Match**   |   US #1 
+\`\`\`open 74.91.119.229:7020\`\`\`
+**Whitelist US**      
+\`\`\`open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC\`\`\`
+# Confirmed Roster
+*Those who are signed up to play.*
 \`\`\`md
-open 74.91.113.4:6999?password=nkmeqi039X!6ZPH8
+------
+------
+------
+------
+------
+------
 \`\`\`
-### Server (Click to Copy)
-\`\`\`md
-open 74.91.119.229:7020
-\`\`\`
-### Players
-\`\`\`md
-Gwemwin
-------
-------
-------
-------
-------
-\`\`\`
-### Backup
+# Backup Roster
+*Those who can tentatively join or are willing to join if someone in the main list can't make it.*
 \`\`\`md
 ------
 ------
 ------
+(add more as necessary)
 \`\`\`
 `;
   return (
@@ -64,7 +65,7 @@ Gwemwin
           </strong>
         </div>
       </div>
-      {/* <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
+      {/* <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown> */}
       <button
         className="btn btn-outline btn-info"
         onClick={() => {
@@ -75,7 +76,7 @@ Gwemwin
       </button>
       <button className="btn btn-outline btn-info" onClick={copyImgToClipboard}>
         Copy to Image
-      </button> */}
+      </button>
     </>
   );
 };

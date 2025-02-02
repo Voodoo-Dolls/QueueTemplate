@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 body{
-    font-family: var("--font-Noto-Sans");
     background-color: 	#36393e;
     color:white;
 }
-code{
+
+.markdown code{
     background-color: oklab(0.296709 -0.000735492 -0.00772537);
     border-radius: 4px;
     border:1px solid oklab(0.239468 0.000131123 -0.00589392);
