@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color:oklab(0.321044 -0.000249296 -0.00927344);
+    color:white;
+}
+
+/* Markdown */
+
+.markdown{
+
+    h1{
+        margin-top: 8px;
+        font-size: 1.5rem;
+        margin: 16px 0 8px;
+        font-weight: 700;
+        line-height: 1.375em;
+    }
+    h3{
+        font-weight: 500;
+    }
+    p > strong:nth-of-type(even){
+        @apply mx-2;
+        
+    }
+    code{
+        background-color: oklab(0.296709 -0.000735492 -0.00772537);
+        border-radius: 4px;
+        border:1px solid oklab(0.239468 0.000131123 -0.00589392);
+        padding:0.2em
+    }
+    pre:has(.language-md){
+        border-radius: 4px;
+        background-color: oklab(0.296709 -0.000735492 -0.00772537);
+        border:1px solid oklab(0.239468 0.000131123 -0.00589392);
+        padding: 4px;
+        margin-top: 6px;
+        margin-bottom: 21px;
+        text-wrap: wrap;
+    }
+    .language-md{
+        display: flex;
+        background-color: none;
+        border: none;
+    }
+    .muted{
+        color:   oklab(0.686636 -0.00407365 -0.0149199);
+    }
+}
+
+
+/* Form Styles */
+.select{
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}

@@ -1,13 +1,12 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-const MarkdownComponent = () => {
-  const [title, setTitle] = useState("Hello");
-
-  const copyImgToClipboard = async (animal) => {
-    const URL = `https://imgur.com/FR5oBYW`;
+const MarkdownComponent = ({ markdown, image }) => {
+  const copyImgToClipboard = async () => {
+    const URL = image;
     console.log("test");
     try {
       const copiedImage = await fetch(URL);
@@ -19,61 +18,39 @@ const MarkdownComponent = () => {
     }
   };
 
-  const markdown = `
-# Match Parameters
-**\`🌎 Map\`**   **::**   Any
-**\`🏆 Record Category\`**   **::**   \`⌛ Classic\`
-**\`♻️ SpawnCycle\`**   **::**   Any
-**\`😈 Max Monsters\`**   **::**   Any
-**\`💪 ZED Type\`**   **::**   Vanilla
-**\`🕐 Start Time\`**   **::**   In at least 30 minutes
-  
-# Server Information 
-**Match**   |   US #1 
-\`\`\`open 74.91.119.229:7020\`\`\`
-**Whitelist US**      
-\`\`\`open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC\`\`\`
-# Confirmed Roster
-*Those who are signed up to play.*
-\`\`\`md
-------
-------
-------
-------
-------
-------
-\`\`\`
-# Backup Roster
-*Those who can tentatively join or are willing to join if someone in the main list can't make it.*
-\`\`\`md
-------
-------
-------
-(add more as necessary)
-\`\`\`
-`;
   return (
     <>
-      <div className="container p-4 flex">
+      <div className="flex gap-5">
         {/* PROFILE */}
-        <div></div>
-        {/* Message */}
-        <div>
-          <h1 className="mt-[8px] text-[1.5rem] font-bold">Match Paremeters</h1>
-          <strong>
-            <code>🌎 Map</code>
-          </strong>
+        <div className="hidden lg:block">
+          <Image
+            src="/profile.webp"
+            height={48}
+            width={48}
+            alt="Voodoo Doll's Profile Icon"
+            className="rounded-full w-[48px] h-[48px] max-w-32"
+          />
+        </div>
+
+        <div className="markdown w-full">
+          <div className="hidden lg:block">
+            <h3 className="mb-1">
+              <span className="mr-[0.5rem]">Voodoo Doll</span>
+              <span className="text-[0.75rem] muted">Today at 10:30 AM</span>
+            </h3>
+          </div>
+          <Image
+            src={image}
+            width={512}
+            height={208}
+            sizes="100vw"
+            className="h-auto w-full rounded-md"
+            alt=""
+          />
+          <Markdown>{markdown}</Markdown>
         </div>
       </div>
-      {/* <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown> */}
-      <button
-        className="btn btn-outline btn-info"
-        onClick={() => {
-          navigator.clipboard.writeText(markdown);
-        }}
-      >
-        Copy to Clipboard
-      </button>
+
       <button className="btn btn-outline btn-info" onClick={copyImgToClipboard}>
         Copy to Image
       </button>
