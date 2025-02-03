@@ -2,6 +2,9 @@
 import { useState } from "react";
 import MarkdownComponent from "./Markdown/Markdown";
 import Link from "next/link";
+import maps from "../utils/maps";
+import cycles from "../utils/cycles";
+import category from "../utils/category";
 
 const Form = () => {
   const [settings, setSettings] = useState({
@@ -14,6 +17,7 @@ const Form = () => {
     mm: 48,
     zedType: "Vanilla",
     startTime: "ASAP",
+    password: "YorQ&^B{1u!80+dC",
   });
 
   const markdown = `
@@ -32,7 +36,7 @@ open 74.91.119.229:7020
 \`\`\`   
 **Whitelist US**
 \`\`\`md
-open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC
+open 74.91.113.4:6999?password=${settings.password}
 \`\`\`
 # Confirmed Roster
 *Those who are signed up to play.*
@@ -49,10 +53,10 @@ open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC
 \`\`\`md
 ------
 ------
-------
 (add more as necessary)
 \`\`\`
 `;
+
   const handleFormChange = (event) => {
     let value = event.target.value;
     let name = event.target.name;
@@ -62,9 +66,8 @@ open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC
         [name]: name === "map" ? JSON.parse(value) : value,
       };
     });
-    console.log(settings);
+    // console.log(settings);
   };
-
   const copyImgToClipboard = async () => {
     try {
       const copiedImage = await fetch(settings.map.image);
@@ -102,27 +105,14 @@ open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC
               >
                 Any
               </option>
-              <option
-                value={
-                  '{"name":"Hell\'s Crypt", "image":"https://i.imgur.com/FR5oBYW.png"}'
-                }
-              >
-                Hell's Crypt
-              </option>
-              <option
-                value={
-                  '{"name":"Steam Fortress", "image":"https://i.imgur.com/IemYWrv.png"}'
-                }
-              >
-                Steam Fortress
-              </option>
-              <option
-                value={
-                  '{"name":"West London", "image":"https://i.imgur.com/K67ZgBg.png"}'
-                }
-              >
-                West London
-              </option>
+              {maps.map((map, index) => (
+                <option
+                  value={`{"name":"${map.name}", "image":"${map.image}"}`}
+                  key={index}
+                >
+                  {map.name} ({index})
+                </option>
+              ))}
             </select>
           </div>
           {/* Category */}
@@ -139,15 +129,11 @@ open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC
               name="category"
               onChange={(event) => handleFormChange(event)}
             >
-              <option defaultValue value="🎯 Precision">
-                🎯 Precision
-              </option>
-              <option defaultValue value="🏅 Standard">
-                🏅 Standard
-              </option>
-              <option defaultValue value="🔥 Mayhem">
-                🔥 Mayhem
-              </option>
+              {category.map((category) => (
+                <option value={category} key={category}>
+                  {category}
+                </option>
+              ))}
             </select>
           </div>
           {/* SpawnCycle */}
@@ -167,12 +153,11 @@ open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC
               <option defaultValue value="Any">
                 Any
               </option>
-              <option defaultValue value="asl_v3">
-                asl_v3
-              </option>
-              <option defaultValue value="bl_v2">
-                bl_v2
-              </option>
+              {cycles.map((cycle) => (
+                <option value={cycle} key={cycle}>
+                  {cycle}
+                </option>
+              ))}
             </select>
           </div>
           {/* Max Monsters */}
@@ -181,7 +166,7 @@ open 74.91.113.4:6999?password=YorQ&^B{1u!80+dC
               htmlFor="number-input"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Select a number:
+              Max Monsters
             </label>
             <input
               type="number"

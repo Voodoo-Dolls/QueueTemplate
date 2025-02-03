@@ -5,19 +5,6 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 const MarkdownComponent = ({ markdown, image }) => {
-  const copyImgToClipboard = async () => {
-    const URL = image;
-    console.log("test");
-    try {
-      const copiedImage = await fetch(URL);
-      const blobData = await copiedImage.blob();
-      const clipboardItemInput = new ClipboardItem({ "image/png": blobData });
-      navigator.clipboard.write([clipboardItemInput]);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <>
       <div className="flex gap-5">
@@ -47,6 +34,7 @@ const MarkdownComponent = ({ markdown, image }) => {
             className="h-auto w-full rounded-md"
             alt=""
           />
+          <p>{image}</p>
           <Markdown>{markdown}</Markdown>
         </div>
       </div>
