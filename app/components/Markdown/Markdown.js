@@ -50,10 +50,6 @@ const MarkdownComponent = ({ markdown, image }) => {
           <Markdown>{markdown}</Markdown>
         </div>
       </div>
-
-      <button className="btn btn-outline btn-info" onClick={copyImgToClipboard}>
-        Copy to Image
-      </button>
     </>
   );
 };
