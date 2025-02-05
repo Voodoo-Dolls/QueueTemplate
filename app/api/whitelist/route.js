@@ -6,7 +6,7 @@ export async function GET() {
     const db = await createConnection("cd_whitelist");
     const sql = "SELECT value FROM password;";
     const [res] = await db.query(sql);
-    db.end();
+    // db.end();
     return NextResponse.json(res);
   } catch (error) {
     console.log(error);

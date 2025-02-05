@@ -1,17 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import MarkdownComponent from "./Markdown/Markdown";
+import Link from "next/link";
 import { FaImage } from "react-icons/fa6";
 import { IoDocumentTextOutline } from "react-icons/io5";
-
+// Icons
 import { FaDice } from "react-icons/fa";
-
-import Link from "next/link";
-import maps from "../utils/maps";
-import cycles from "../utils/cycles";
-import category from "../utils/category";
-
+// Json
+import maps from "../json/maps";
+import recordMaps from "../json/recordMaps";
+import cycles from "../json/cycles";
+import category from "../json/category";
+// Components
+import MarkdownComponent from "./Markdown/Markdown";
 const Form = () => {
+  // STATE
   const [settings, setSettings] = useState({
     map: {
       name: "Any",
@@ -22,13 +24,22 @@ const Form = () => {
     mm: 48,
     zedType: "Vanilla",
     startTime: "ASAP",
-    password: "asd",
+    password: "Fetching Password...",
   });
+  const [isValid, setIsValid] = useState({
+    valid: false,
+    mm: "asd",
+    map: "",
+  });
+  const [record, setRecord] = useState("This is not a record");
   // GET WHITELIST
   useEffect(() => {
     const getWhitelist = async () => {
       const res = await fetch("/api/whitelist");
       const password = await res.json();
+      if (!res.ok) {
+        return "Failed";
+      }
       return password[0].value;
     };
     getWhitelist().then((password) => {
@@ -41,6 +52,76 @@ const Form = () => {
     });
   }, []);
 
+  // VERIFY RECORD
+  useEffect(() => {
+    const handleValid = () => {
+      let valid = true;
+      // Max Monsters Checks if mm is above 40 OR divisible by 8
+      if (parseInt(settings.mm) < 40 || parseInt(settings.mm) % 8 !== 0) {
+        console.log("Max Monster is invalid");
+        valid = false;
+      }
+      // Map
+      if (!recordMaps.includes(settings.map.name)) {
+        console.log("Map is not a Record Map");
+        valid = false;
+      }
+    };
+    const handleValues = () => {
+      let map = settings.map.name;
+      let cat = settings.category.substring(3);
+      let sc = settings.cycle;
+      let mm = settings.mm;
+      let zt;
+
+      switch (settings.zedType) {
+        case "Vanilla":
+          zt = 0;
+          break;
+        case "Anomaly":
+          zt = 1;
+          break;
+        case "Apex":
+          zt = 2;
+          break;
+        case "Infernal":
+          zt = 3;
+          break;
+      }
+      return {
+        map: map,
+        cat: cat,
+        sc: sc,
+        mm: mm,
+        zt: zt,
+      };
+    };
+    const getRecord = async () => {
+      let params = handleValues();
+      const { map, cat, sc, mm, zt } = params;
+      console.log(params);
+      const res = await fetch(
+        `/api/records?map=${map}&cat=${cat}&sc=${sc}&mm=${mm}&zt=${zt}`
+      );
+      const record = await res.json();
+      if (!res.ok) {
+        return "Failed";
+      }
+      return record;
+    };
+
+    handleValid();
+    // if (isValid.valid) {
+    //   getRecord().then((record) => {
+    //     if (record.length === 1) {
+    //       setRecord("ITEM FOUND");
+    //     } else {
+    //       setRecord("THIS IS A NEW RECORD");
+    //     }
+    //   });
+    // }
+  }, [settings]);
+  // TEMPLATE FILE
   const markdown = `
 # Match Parameters
 **\`🌎 Map\`**   **::**   ${settings.map.name}   
@@ -79,6 +160,7 @@ open 74.91.113.4:6999?password=${settings.password}
 `;
 
   // FORM HANDLERS
+
   const handleFormChange = (event) => {
     let value = event.target.value;
     let name = event.target.name;
@@ -224,7 +306,7 @@ open 74.91.113.4:6999?password=${settings.password}
                 type="number"
                 name="mm"
                 id="number-input"
-                step={4}
+                step={8}
                 value={settings.mm}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 onChange={(event) => handleFormChange(event)}
@@ -335,6 +417,15 @@ open 74.91.113.4:6999?password=${settings.password}
               map list. If you know the map name or have suggestions please DM
               Voodoo Doll on discord.
             </p>
+            <p className="mt-4">DEBUG:{record}</p>
+            <p className="mt-4">
+              IsValid:{" "}
+              {isValid ? "THESE SETTINGS ARE VALID" : "THIS IS INVALID"}
+            </p>
+            {/* RECORD DISPLAY */}
+            <div className="w-full p-4 bg-neutral-600">
+              {isValid.mm && <p>MM is not Valid{isValid.mm}</p>}
+            </div>
           </div>
         </div>
         <div className="lg:w-1/2 w-full">
