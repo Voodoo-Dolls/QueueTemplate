@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import MarkdownComponent from "./Markdown/Markdown";
+import { FaDice } from "react-icons/fa";
+
 import Link from "next/link";
 import maps from "../utils/maps";
 import cycles from "../utils/cycles";
@@ -68,6 +70,17 @@ open 74.91.113.4:6999?password=${settings.password}
     });
     // console.log(settings);
   };
+
+  const handleRandom = () => {
+    let randomNumber = Math.floor(Math.random() * (maps.length - 1) + 1);
+    setSettings((prev) => {
+      return {
+        ...prev,
+        map: maps[randomNumber],
+      };
+    });
+    return randomNumber;
+  };
   const copyImgToClipboard = async () => {
     try {
       const copiedImage = await fetch(settings.map.image);
@@ -84,36 +97,53 @@ open 74.91.113.4:6999?password=${settings.password}
         <div className="relative z-0 lg:w-1/2 mb-5 group flex flex-col gap-4 lg:max-w-[600px]">
           <h2 className="font-bold text-2xl">Queue Template</h2>
           {/* Map */}
-          <div>
-            <label
-              htmlFor="maps"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Select a Map
-            </label>
-            <select
-              id="maps"
-              className="select cursor-pointer"
-              name="map"
-              onChange={(event) => handleFormChange(event)}
-            >
-              <option
-                defaultValue
-                value={
-                  '{"name":"Any", "image":"https://i.imgur.com/FR5oBYW.png"}'
-                }
+          <div className="flex gap-4 justify-between">
+            <div className="flex-grow">
+              <label
+                htmlFor="maps"
+                className="block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Any
-              </option>
-              {maps.map((map, index) => (
+                Select a Map
+              </label>
+              <select
+                id="maps"
+                className="select cursor-pointer"
+                name="map"
+                onChange={(event) => handleFormChange(event)}
+                value={settings.map}
+              >
                 <option
-                  value={`{"name":"${map.name}", "image":"${map.image}"}`}
-                  key={index}
+                  defaultValue
+                  value={
+                    '{"name":"Any", "image":"https://i.imgur.com/FR5oBYW.png"}'
+                  }
                 >
-                  {map.name} ({index})
+                  Any
                 </option>
-              ))}
-            </select>
+                {maps.map((map, index) => (
+                  <option
+                    value={`{"name":"${map.name}", "image":"${map.image}"}`}
+                    key={index}
+                  >
+                    {map.name} ({index})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mt-auto">
+              <button
+                type="button"
+                className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 flex items-center gap-2"
+                onClick={() => {
+                  handleRandom();
+                }}
+              >
+                <span className="text-xl">
+                  <FaDice />
+                </span>
+                Random Map
+              </button>
+            </div>
           </div>
           <div className="md:flex gap-4">
             {/* Category */}
