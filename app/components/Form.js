@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MarkdownComponent from "./Markdown/Markdown";
 import { FaImage } from "react-icons/fa6";
 import { IoDocumentTextOutline } from "react-icons/io5";
@@ -22,8 +22,24 @@ const Form = () => {
     mm: 48,
     zedType: "Vanilla",
     startTime: "ASAP",
-    password: "7!@bzVot+H1X9M0f",
+    password: "asd",
   });
+  // GET WHITELIST
+  useEffect(() => {
+    const getWhitelist = async () => {
+      const res = await fetch("/api/whitelist");
+      const password = await res.json();
+      return password[0].value;
+    };
+    getWhitelist().then((password) => {
+      setSettings((prev) => {
+        return {
+          ...prev,
+          password: password,
+        };
+      });
+    });
+  }, []);
 
   const markdown = `
 # Match Parameters
@@ -62,6 +78,7 @@ open 74.91.113.4:6999?password=${settings.password}
 \`\`\`
 `;
 
+  // FORM HANDLERS
   const handleFormChange = (event) => {
     let value = event.target.value;
     let name = event.target.name;
@@ -73,7 +90,6 @@ open 74.91.113.4:6999?password=${settings.password}
     });
     // console.log(settings);
   };
-
   const handleRandom = () => {
     let randomNumber = Math.floor(Math.random() * (maps.length - 1) + 1);
     setSettings((prev) => {
@@ -94,6 +110,7 @@ open 74.91.113.4:6999?password=${settings.password}
       console.log(e);
     }
   };
+  // COMPONENT
   return (
     <>
       <div className="container mx-auto lg:flex gap-4 p-4 relative justify-between">
