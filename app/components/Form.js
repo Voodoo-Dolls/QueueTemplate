@@ -115,96 +115,100 @@ open 74.91.113.4:6999?password=${settings.password}
               ))}
             </select>
           </div>
-          {/* Category */}
-          <div>
-            <label
-              htmlFor="category"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Select a Category
-            </label>
-            <select
-              id="category"
-              className="select cursor-pointer"
-              name="category"
-              onChange={(event) => handleFormChange(event)}
-            >
-              {category.map((category) => (
-                <option value={category} key={category}>
-                  {category}
+          <div className="md:flex gap-4">
+            {/* Category */}
+            <div className="md:w-1/3 mb-4">
+              <label
+                htmlFor="category"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white "
+              >
+                Select a Category
+              </label>
+              <select
+                id="category"
+                className="select cursor-pointer"
+                name="category"
+                onChange={(event) => handleFormChange(event)}
+              >
+                {category.map((category) => (
+                  <option value={category} key={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* SpawnCycle */}
+            <div className="md:w-2/3">
+              <label
+                htmlFor="cycle"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Select a Cycle
+              </label>
+              <select
+                id="cycle"
+                className="select cursor-pointer"
+                name="cycle"
+                onChange={(event) => handleFormChange(event)}
+              >
+                <option defaultValue value="Any">
+                  Any
                 </option>
-              ))}
-            </select>
+                {cycles.map((cycle) => (
+                  <option value={cycle} key={cycle}>
+                    {cycle}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-          {/* SpawnCycle */}
-          <div>
-            <label
-              htmlFor="cycle"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Select a Cycle
-            </label>
-            <select
-              id="cycle"
-              className="select cursor-pointer"
-              name="cycle"
-              onChange={(event) => handleFormChange(event)}
-            >
-              <option defaultValue value="Any">
-                Any
-              </option>
-              {cycles.map((cycle) => (
-                <option value={cycle} key={cycle}>
-                  {cycle}
+          <div className="md:flex gap-4">
+            {/* Max Monsters */}
+            <div className="mb-4 md:w-1/3">
+              <label
+                htmlFor="number-input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Max Monsters
+              </label>
+              <input
+                type="number"
+                name="mm"
+                id="number-input"
+                step={4}
+                value={settings.mm}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={(event) => handleFormChange(event)}
+              />
+            </div>
+            {/* Zed Type */}
+            <div className="md:w-2/3">
+              <label
+                htmlFor="zedType"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Zed Type
+              </label>
+              <select
+                id="category"
+                className="select cursor-pointer"
+                name="zedType"
+                onChange={(event) => handleFormChange(event)}
+              >
+                <option defaultValue value="Vanilla">
+                  Vanilla
                 </option>
-              ))}
-            </select>
-          </div>
-          {/* Max Monsters */}
-          <div className="">
-            <label
-              htmlFor="number-input"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Max Monsters
-            </label>
-            <input
-              type="number"
-              name="mm"
-              id="number-input"
-              step={4}
-              value={settings.mm}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              onChange={(event) => handleFormChange(event)}
-            />
-          </div>
-          {/* Zed Type */}
-          <div>
-            <label
-              htmlFor="zedType"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Select a Category
-            </label>
-            <select
-              id="category"
-              className="select cursor-pointer"
-              name="zedType"
-              onChange={(event) => handleFormChange(event)}
-            >
-              <option defaultValue value="Vanilla">
-                Vanilla
-              </option>
-              <option defaultValue value="Anomaly">
-                Anomaly
-              </option>
-              <option defaultValue value="Apex">
-                Apex
-              </option>
-              <option defaultValue value="Infernal">
-                Infernal
-              </option>
-            </select>
+                <option defaultValue value="Anomaly">
+                  Anomaly
+                </option>
+                <option defaultValue value="Apex">
+                  Apex
+                </option>
+                <option defaultValue value="Infernal">
+                  Infernal
+                </option>
+              </select>
+            </div>
           </div>
           {/* Start Time */}
           <div>
