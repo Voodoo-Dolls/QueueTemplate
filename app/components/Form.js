@@ -113,7 +113,6 @@ open 74.91.113.4:6999?password=${settings.password}
                 className="select cursor-pointer"
                 name="map"
                 onChange={(event) => handleFormChange(event)}
-                value={settings.map}
               >
                 <option
                   defaultValue
