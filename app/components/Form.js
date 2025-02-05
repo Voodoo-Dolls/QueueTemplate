@@ -104,7 +104,7 @@ open 74.91.113.4:6999?password=${settings.password}
             <div className="flex-grow">
               <label
                 htmlFor="maps"
-                className="block text-sm font-medium text-gray-900 dark:text-white"
+                className="block text-sm font-medium text-gray-900 dark:text-white mb-2"
               >
                 Select a Map
               </label>
@@ -311,6 +311,14 @@ open 74.91.113.4:6999?password=${settings.password}
               </span>
               Copy Template
             </button>
+          </div>
+          <div>
+            <h2 className="text-3xl font-bold mb-4">👋 Hi There</h2>
+            <p>
+              Thanks for trying out my tool. I'm currently still working on the
+              map list. If you know the map name or have suggestions please DM
+              Voodoo Doll on discord.
+            </p>
           </div>
         </div>
         <div className="lg:w-1/2 w-full">
