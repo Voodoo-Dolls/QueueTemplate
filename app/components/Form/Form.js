@@ -5,6 +5,7 @@ import { useDebounce } from "@uidotdev/usehooks";
 // Icons
 import { FaCheck } from "react-icons/fa";
 import { IoWarning } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 
 // Json
 import maps from "@/app/json/maps";
@@ -41,8 +42,10 @@ const Form = () => {
   const [isValid, setIsValid] = useState({
     valid: false,
     mm: "",
+    divisible: "",
     map: `The Map "${settings.map.name}" is not a record map.`,
     cycle: `The Spawncycle "${settings.cycle}" is not a record cycle`,
+    infernalClassic: "",
   });
   const [record, setRecord] = useState("");
   const debouncedSearchTerm = useDebounce(isValid, 1000);
@@ -73,14 +76,14 @@ const Form = () => {
       setRecord("");
       let valid = true;
 
-      // Max Monsters Checks if mm is above 40 OR divisible by 8
-      if (parseInt(settings.mm) < 40 || parseInt(settings.mm) % 8 !== 0) {
+      // Max Monsters Checks if mm is above 40
+      if (parseInt(settings.mm) < 40) {
         // console.log("Max Monster is invalid");
         valid = false;
         setIsValid((prev) => {
           return {
             ...prev,
-            mm: "Max Monsters must be greater 40 and divisible by 8",
+            mm: "Max Monsters must be at least 40",
           };
         });
       } else {
@@ -91,13 +94,30 @@ const Form = () => {
           };
         });
       }
+      // Divisible checks if Max Monsters is a multiple of 8
+      if (parseInt(settings.mm) & (8 !== 0)) {
+        valid = false;
+        setIsValid((prev) => {
+          return {
+            ...prev,
+            divisible: "Max Monsters must be a multiple of 8",
+          };
+        });
+      } else {
+        setIsValid((prev) => {
+          return {
+            ...prev,
+            divisible: "",
+          };
+        });
+      }
       // Map Checks if Map is in included in the record Maps
       if (!recordMaps.includes(settings.map.name)) {
         valid = false;
         setIsValid((prev) => {
           return {
             ...prev,
-            map: `The Map "${settings.map.name}" is not a record map.`,
+            map: `The Map "${settings.map.name}" is not a record map`,
           };
         });
       } else {
@@ -114,7 +134,7 @@ const Form = () => {
         setIsValid((prev) => {
           return {
             ...prev,
-            cycle: `The Spawncycle "${settings.cycle}" is not a record cycle`,
+            cycle: `The Spawncycle "${settings.cycle}" is not valid for CD Records`,
           };
         });
       } else {
@@ -122,6 +142,26 @@ const Form = () => {
           return {
             ...prev,
             cycle: "",
+          };
+        });
+      }
+      // Checks if Infernal is Mixed with classic
+      if (
+        settings.category === "⌛ Classic" &&
+        settings.zedType === "Infernal"
+      ) {
+        valid = false;
+        setIsValid((prev) => {
+          return {
+            ...prev,
+            infernalClassic: `The Infernal Zed Type is not supported by the Classic category`,
+          };
+        });
+      } else {
+        setIsValid((prev) => {
+          return {
+            ...prev,
+            infernalClassic: "",
           };
         });
       }
@@ -198,24 +238,38 @@ const Form = () => {
         if (record.length === 1) {
           setRecord(
             <div className="p-4 rounded-md border border-yellow-500 bg-yellow-500 bg-opacity-10">
-              <h2 className="text-lg font-bold flex items-center gap-2">
-                <span className="text-yellow-500 text-3xl">
+              <h2 className="text-xl font-extrabold flex items-center gap-2 text-yellow-500">
+                <span>
                   <IoWarning />
                 </span>
-                Verified (Matching) Current Record is: "{record[0].max_monsters}
-                "
+                Verified (Matching)
               </h2>
+              <ul className="list-disc list-inside">
+                <li>
+                  The Current settings are valid, but a record with higher Max
+                  Monsters exists.
+                </li>
+                <li>The Current high score is: 48</li>
+                <li>Stats will be tracked for this match</li>
+              </ul>
             </div>
           );
         } else {
           setRecord(
             <div className="p-4 rounded-md border border-green-500 bg-green-500 bg-opacity-10">
-              <h2 className="font-bold flex items-center gap-2">
-                <span className="text-[#44FF44]">
+              <h2 className="font-extrabold flex items-center gap-2 text-green-500 text-xl">
+                <span>
                   <FaCheck />
                 </span>
                 Verified (New Record)
               </h2>
+              <ul className="list-disc list-inside">
+                <li>
+                  The current settings are valid and will result in a new
+                  record!
+                </li>
+                <li>Stats will be tracked for this match</li>
+              </ul>
             </div>
           );
         }
@@ -298,7 +352,7 @@ open 74.91.113.4:6999?password=${settings.password}
           />
           {/* Category + Spawn Cycle */}
           <div className="md:flex gap-4">
-            <Category handleFormChange={handleFormChange} />
+            <Category handleFormChange={handleFormChange} settings={settings} />
             <SpawnCycle handleFormChange={handleFormChange} />
           </div>
           {/* Max Monsters  + Zed Type*/}
@@ -307,7 +361,7 @@ open 74.91.113.4:6999?password=${settings.password}
               handleFormChange={handleFormChange}
               settings={settings}
             />
-            <ZedType handleFormChange={handleFormChange} />
+            <ZedType handleFormChange={handleFormChange} settings={settings} />
           </div>
           {/* Start Time + Server */}
           <div>
@@ -335,11 +389,18 @@ open 74.91.113.4:6999?password=${settings.password}
             ) : (
               // If not Valid
               <div className="p-4 border border-red-500 rounded-md bg-red-500 bg-opacity-10">
-                <p className="mb-2">❌ Not Verified</p>
+                <h2 className="mb-2 font-extrabold text-[#FF4444] text-xl">
+                  ❌ Not Verified
+                </h2>
                 <ul className="list-disc list-inside">
                   {isValid.mm && <li>{isValid.mm}</li>}
-                  {isValid.map && <li>{isValid.map}</li>}
+                  {isValid.divisible && <li>{isValid.divisible}</li>}
                   {isValid.cycle && <li>{isValid.cycle}</li>}
+                  {isValid.map && <li>{isValid.map}</li>}
+                  {isValid.infernalClassic && (
+                    <li>{isValid.infernalClassic}</li>
+                  )}
+                  <li>Stats will NOT be tracked for this match</li>
                 </ul>
               </div>
             )}

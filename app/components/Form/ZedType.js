@@ -1,4 +1,4 @@
-const ZedType = ({ handleFormChange }) => {
+const ZedType = ({ handleFormChange, settings }) => {
   return (
     <div className="md:w-2/3">
       <label
@@ -22,7 +22,11 @@ const ZedType = ({ handleFormChange }) => {
         <option defaultValue value="Apex">
           Apex
         </option>
-        <option defaultValue value="Infernal">
+        <option
+          defaultValue
+          value="Infernal"
+          disabled={settings.category === "⌛ Classic"}
+        >
           Infernal
         </option>
       </select>

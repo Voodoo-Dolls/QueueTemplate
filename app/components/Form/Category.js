@@ -1,6 +1,6 @@
 import category from "@/app/json/category";
 
-const Category = ({ handleFormChange }) => {
+const Category = ({ handleFormChange, settings }) => {
   return (
     <div className="md:w-1/3 mb-4">
       <label
@@ -16,7 +16,13 @@ const Category = ({ handleFormChange }) => {
         onChange={(event) => handleFormChange(event)}
       >
         {category.map((category) => (
-          <option value={category} key={category}>
+          <option
+            value={category}
+            key={category}
+            disabled={
+              settings.zedType === "Infernal" && category === "⌛ Classic"
+            }
+          >
             {category}
           </option>
         ))}
