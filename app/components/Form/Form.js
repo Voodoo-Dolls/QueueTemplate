@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useDebounce } from "@uidotdev/usehooks";
 
 // Icons
 // Json
@@ -17,6 +17,7 @@ import MaxMonsters from "./MaxMonsters";
 import ZedType from "./ZedType";
 import StartTime from "./StartTime";
 import CopyToClipboard from "./CopyToClipboard";
+import Spinner from "../Spinner";
 
 const Form = () => {
   // STATE
@@ -37,10 +38,11 @@ const Form = () => {
   const [isValid, setIsValid] = useState({
     valid: false,
     mm: "",
-    map: "",
-    cycle: "",
+    map: `The Map "${settings.map.name}" is not a record map.`,
+    cycle: `The Spawncycle "${settings.cycle}" is not a record cycle`,
   });
   const [record, setRecord] = useState("");
+  const debouncedSearchTerm = useDebounce(isValid, 1000);
   // GET WHITELIST
   useEffect(() => {
     const getWhitelist = async () => {
@@ -92,7 +94,7 @@ const Form = () => {
         setIsValid((prev) => {
           return {
             ...prev,
-            map: `${settings.map.name} is not a record map.`,
+            map: `The Map "${settings.map.name}" is not a record map.`,
           };
         });
       } else {
@@ -109,7 +111,7 @@ const Form = () => {
         setIsValid((prev) => {
           return {
             ...prev,
-            cycle: `${settings.cycle} is not a valid cycle`,
+            cycle: `The Spawncycle "${settings.cycle}" is not a record cycle`,
           };
         });
       } else {
@@ -137,9 +139,16 @@ const Form = () => {
         });
       }
     };
+
+    handleValid();
+  }, [settings]);
+
+  // GET RECORD
+  useEffect(() => {
+    // Formats Values for the Query
     const handleValues = () => {
       let map = settings.map.name;
-      let cat = settings.category.substring(1).trim();
+      let cat = settings.category.slice(2).trim();
       let sc = settings.cycle;
       let mm = settings.mm;
       let zt;
@@ -166,6 +175,7 @@ const Form = () => {
         zt: zt,
       };
     };
+
     const getRecord = async () => {
       let params = handleValues();
       const { map, cat, sc, mm, zt } = params;
@@ -180,18 +190,24 @@ const Form = () => {
       return record;
     };
 
-    handleValid();
-
-    // if (isValid.valid) {
-    //   getRecord().then((record) => {
-    //     if (record.length === 1) {
-    //       setRecord(<h1>EXISTING RECORD FOUND</h1>);
-    //     } else {
-    //       setRecord(<h1>THIS IS A NEW RECORD</h1>);
-    //     }
-    //   });
-    // }
-  }, [settings]);
+    if (isValid.valid) {
+      getRecord().then((record) => {
+        if (record.length === 1) {
+          setRecord(
+            <h2 className="text-lg font-bold text-[#FFFF44]">
+              ⚠️ Verified (Matching) Record is: "{record[0].max_monsters}"
+            </h2>
+          );
+        } else {
+          setRecord(
+            <h2 className="text-lg font-bold text-[#44FF44]">
+              ✅ Verified (New Record)
+            </h2>
+          );
+        }
+      });
+    }
+  }, [debouncedSearchTerm]);
 
   // TEMPLATE FILE
   const markdown = `
@@ -289,22 +305,37 @@ open 74.91.113.4:6999?password=${settings.password}
           </div>
           <CopyToClipboard settings={settings} markdown={markdown} />
           <div>
-            <h2 className="text-3xl font-bold mb-4">👋 Hi There</h2>
+            {/* <h2 className="text-3xl font-bold mb-4">👋 Hi There</h2>
             <p className="mb-4">
               Thanks for trying out my tool. I'm currently still working on the
               map list. If you know the map name or have suggestions please DM
               Voodoo Doll on discord.
-            </p>
+            </p> */}
 
             {/* RECORD DISPLAY */}
-            {isValid.valid ? record : <p>Settings Not Valid</p>}
-            <div className="w-full p-4 bg-neutral-600">
-              {isValid.mm && <p>{isValid.mm}</p>}
-              {isValid.map && <p>{isValid.map}</p>}
-              {isValid.cycle && <p>{isValid.cycle}</p>}
-            </div>
-            <p>Settings are {isValid.valid ? "Valid" : "Invalid"}</p>
-            <p>Category: {settings.category.split(1)}</p>
+
+            {isValid.valid ? (
+              record ? (
+                // If Valid & Fetching Complete
+                record
+              ) : (
+                // If Valid & Fetching Data
+                <div className="flex gap-2 items-center">
+                  <Spinner />
+                  <p>Fetching Data</p>
+                </div>
+              )
+            ) : (
+              // If not Valid
+              <div className="p-4 border border-red-500 rounded-md bg-red-500 bg-opacity-10">
+                <p className="mb-2">❌ Not Verified</p>
+                <ul className="list-disc list-inside">
+                  {isValid.mm && <li>{isValid.mm}</li>}
+                  {isValid.map && <li>{isValid.map}</li>}
+                  {isValid.cycle && <li>{isValid.cycle}</li>}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
         <div className="lg:w-1/2 w-full">
