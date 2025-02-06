@@ -2,17 +2,17 @@ import maps from "@/app/json/maps";
 import { FaDice } from "react-icons/fa";
 const Map = ({ handleFormChange, handleRandom }) => {
   return (
-    <div className="flex gap-4 justify-between">
-      <div className="flex-grow">
-        <label
-          htmlFor="maps"
-          className="block text-sm font-medium text-gray-900 dark:text-white mb-2"
-        >
-          Select a Map
-        </label>
+    <div className="">
+      <label
+        htmlFor="maps"
+        className="block text-sm font-medium  text-white mb-2"
+      >
+        Select a Map
+      </label>
+      <div className="flex items-center gap-4">
         <select
           id="maps"
-          className="select cursor-pointer"
+          className="select cursor-pointer flex-grow"
           name="map"
           onChange={(event) => handleFormChange(event)}
         >
@@ -26,16 +26,16 @@ const Map = ({ handleFormChange, handleRandom }) => {
             <option
               value={`{"name":"${map.name}", "image":"${map.image}"}`}
               key={index}
+              className="active:bg-red-300"
             >
               {map.name} ({index})
             </option>
           ))}
         </select>
-      </div>
-      <div className="mt-auto">
+
         <button
           type="button"
-          className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 flex items-center gap-2"
+          className="whitespace-nowrap font-medium text-md border-violet-500 text-violet-400 hover:text-white flex items-center gap-2 transition-colors"
           onClick={() => {
             handleRandom();
           }}

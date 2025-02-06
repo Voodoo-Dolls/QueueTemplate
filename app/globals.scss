@@ -50,8 +50,40 @@ body{
     }
 }
 
+// Scrollbar
+
+/* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
+/** {
+  scrollbar-width: thin;
+  scrollbar-color: #397524 #DFE9EB;
+}*/
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+    height: 3px;
+    width: 3px;
+  }
+  *::-webkit-scrollbar-track {
+    border-radius: 0px;
+    @apply bg-neutral-400
+  }
+  
+  *::-webkit-scrollbar-track:hover {
+    @apply bg-neutral-700;
+  }
+  
+  *::-webkit-scrollbar-track:active {
+    @apply bg-neutral-700;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    @apply bg-neutral-500;
+  }
+  
+
 
 /* Form Styles */
 .select{
-    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+    @apply  border-[2px] text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-700 placeholder-gray-400 text-white focus:border-violet-500 focus:outline-none;
 }

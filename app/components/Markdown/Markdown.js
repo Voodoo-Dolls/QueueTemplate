@@ -34,7 +34,6 @@ const MarkdownComponent = ({ markdown, image }) => {
             className="h-auto w-full rounded-md"
             alt=""
           />
-          <p>{image}</p>
           <Markdown>{markdown}</Markdown>
         </div>
       </div>

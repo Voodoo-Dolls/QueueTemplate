@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 
 // Icons
+import { FaCheck } from "react-icons/fa";
+import { IoWarning } from "react-icons/io5";
+
 // Json
 import maps from "@/app/json/maps";
 import recordMaps from "@/app/json/recordMaps";
@@ -186,7 +189,7 @@ const Form = () => {
       if (!res.ok) {
         return "Failed";
       }
-      console.log(record);
+      // console.log(record);
       return record;
     };
 
@@ -194,15 +197,26 @@ const Form = () => {
       getRecord().then((record) => {
         if (record.length === 1) {
           setRecord(
-            <h2 className="text-lg font-bold text-[#FFFF44]">
-              ⚠️ Verified (Matching) Record is: "{record[0].max_monsters}"
-            </h2>
+            <div className="p-4 rounded-md border border-yellow-500 bg-yellow-500 bg-opacity-10">
+              <h2 className="text-lg font-bold flex items-center gap-2">
+                <span className="text-yellow-500 text-3xl">
+                  <IoWarning />
+                </span>
+                Verified (Matching) Current Record is: "{record[0].max_monsters}
+                "
+              </h2>
+            </div>
           );
         } else {
           setRecord(
-            <h2 className="text-lg font-bold text-[#44FF44]">
-              ✅ Verified (New Record)
-            </h2>
+            <div className="p-4 rounded-md border border-green-500 bg-green-500 bg-opacity-10">
+              <h2 className="font-bold flex items-center gap-2">
+                <span className="text-[#44FF44]">
+                  <FaCheck />
+                </span>
+                Verified (New Record)
+              </h2>
+            </div>
           );
         }
       });
@@ -304,14 +318,7 @@ open 74.91.113.4:6999?password=${settings.password}
             {/* INSERT SERVER LIST EVENTUALLY  */}
           </div>
           <CopyToClipboard settings={settings} markdown={markdown} />
-          <div>
-            {/* <h2 className="text-3xl font-bold mb-4">👋 Hi There</h2>
-            <p className="mb-4">
-              Thanks for trying out my tool. I'm currently still working on the
-              map list. If you know the map name or have suggestions please DM
-              Voodoo Doll on discord.
-            </p> */}
-
+          <div className="mb-4">
             {/* RECORD DISPLAY */}
 
             {isValid.valid ? (
@@ -320,7 +327,7 @@ open 74.91.113.4:6999?password=${settings.password}
                 record
               ) : (
                 // If Valid & Fetching Data
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-2 items-center p-4">
                   <Spinner />
                   <p>Fetching Data</p>
                 </div>
@@ -337,6 +344,14 @@ open 74.91.113.4:6999?password=${settings.password}
               </div>
             )}
           </div>
+          <h2 className="text-3xl font-bold mb-4 animate-bounce">
+            👋 Hi There
+          </h2>
+          <p className="mb-4 text-balance">
+            Thanks for trying out my tool. I'm almost done with the tool. If you
+            have any feedback or encounter any bugs please DM Voodoo Doll on
+            Discord.
+          </p>
         </div>
         <div className="lg:w-1/2 w-full">
           <h2 className="font-bold text-2xl mb-4">Simulated Output</h2>

@@ -15,7 +15,7 @@ const CopyToClipboard = ({ markdown, settings }) => {
     <div className="flex gap-4">
       <button
         type="button"
-        className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 flex gap-2 items-center"
+        className="border-[2px] focus:outline-none font-medium rounded-lg text-md px-5 py-2.5 text-center border-violet-500 text-violet-400 hover:text-white hover:bg-violet-800 hover:bg-opacity-50 flex items-center gap-2 transition-colors"
         onClick={copyImgToClipboard}
       >
         <span className="text-xl">
@@ -25,7 +25,7 @@ const CopyToClipboard = ({ markdown, settings }) => {
       </button>
       <button
         type="button"
-        className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 flex items-center gap-2"
+        className="border-[2px] focus:outline-none font-medium rounded-lg text-md px-5 py-2.5 text-center border-violet-500 text-violet-400 hover:text-white hover:bg-violet-800 hover:bg-opacity-50 flex items-center gap-2 transition-colors"
         onClick={() => {
           navigator.clipboard.writeText(markdown);
         }}
