@@ -12,7 +12,7 @@ export async function GET(request) {
   // http://localhost:3000/api/records?map=Slaughterhouse&cat=Standard&sc=apm_v2&mm=48&zt=0
   try {
     const db = await createConnection("cdrecords_s3");
-    const sql = `SELECT max_monsters FROM records_global WHERE mapname = "${map}" AND category = "${cat}" AND spawncycle = "${sc}" AND max_monsters >= ${mm} AND zed_type = ${zt};`;
+    const sql = `SELECT * FROM records_global WHERE mapname = "${map}" AND category = "${cat}" AND spawncycle = "${sc}" AND max_monsters >= ${mm} AND zed_type = ${zt};`;
     console.log(sql);
     const [res] = await db.query(sql);
 

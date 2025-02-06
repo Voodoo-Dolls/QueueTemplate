@@ -235,7 +235,7 @@ const Form = () => {
 
     if (isValid.valid) {
       getRecord().then((record) => {
-        if (record.length === 0) {
+        if (record.length > 0) {
           setRecord(
             <div className="p-4 rounded-md border border-yellow-500 bg-yellow-500 bg-opacity-10">
               <h2 className="text-xl font-extrabold flex items-center gap-2 text-yellow-500">
@@ -244,7 +244,7 @@ const Form = () => {
                 </span>
                 Verified (Matching)
               </h2>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc pl-6">
                 <li className="list-outside">
                   The Current settings are valid, but a record with higher Max
                   Monsters exists.
@@ -254,7 +254,7 @@ const Form = () => {
               </ul>
             </div>
           );
-        } else {
+        } else if (record.length == 0) {
           setRecord(
             <div className="p-4 rounded-md border border-green-500 bg-green-500 bg-opacity-10">
               <h2 className="font-extrabold flex items-center gap-2 text-green-500 text-xl">
@@ -263,13 +263,24 @@ const Form = () => {
                 </span>
                 Verified (New Record)
               </h2>
-              <ul className="list-disc">
+              <ul className="list-disc pl-6">
                 <li>
                   The current settings are valid and will result in a new
                   record!
                 </li>
                 <li>Stats will be tracked for this match</li>
               </ul>
+            </div>
+          );
+        } else {
+          setRecord(
+            <div className="p-4 border border-red-500 rounded-md bg-red-500 bg-opacity-10">
+              <h2 className="mb-2 font-extrabold text-red-500 text-xl flex items-center gap-2">
+                <span className="text-2xl">
+                  <RiCloseCircleFill />
+                </span>
+                Error: Please Contact Voodoo Doll
+              </h2>
             </div>
           );
         }
@@ -395,7 +406,7 @@ open 74.91.113.4:6999?password=${settings.password}
                   </span>
                   Not Verified
                 </h2>
-                <ul className="list-disc list-inside">
+                <ul className="list-disc pl-6">
                   {isValid.mm && <li>{isValid.mm}</li>}
                   {isValid.divisible && <li>{isValid.divisible}</li>}
                   {isValid.cycle && <li>{isValid.cycle}</li>}
