@@ -5,7 +5,7 @@ import { useDebounce } from "@uidotdev/usehooks";
 // Icons
 import { FaCheck } from "react-icons/fa";
 import { IoWarning } from "react-icons/io5";
-import { IoCloseOutline } from "react-icons/io5";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 // Json
 import maps from "@/app/json/maps";
@@ -389,8 +389,11 @@ open 74.91.113.4:6999?password=${settings.password}
             ) : (
               // If not Valid
               <div className="p-4 border border-red-500 rounded-md bg-red-500 bg-opacity-10">
-                <h2 className="mb-2 font-extrabold text-[#FF4444] text-xl">
-                  ❌ Not Verified
+                <h2 className="mb-2 font-extrabold text-red-500 text-xl flex items-center gap-2">
+                  <span className="text-2xl">
+                    <RiCloseCircleFill />
+                  </span>
+                  Not Verified
                 </h2>
                 <ul className="list-disc list-inside">
                   {isValid.mm && <li>{isValid.mm}</li>}
