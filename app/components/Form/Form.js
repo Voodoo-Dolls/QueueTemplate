@@ -229,13 +229,13 @@ const Form = () => {
       if (!res.ok) {
         return "Failed";
       }
-      // console.log(record);
+      console.log(record);
       return record;
     };
 
     if (isValid.valid) {
       getRecord().then((record) => {
-        if (record.length === 1) {
+        if (record.length === 0) {
           setRecord(
             <div className="p-4 rounded-md border border-yellow-500 bg-yellow-500 bg-opacity-10">
               <h2 className="text-xl font-extrabold flex items-center gap-2 text-yellow-500">
@@ -245,7 +245,7 @@ const Form = () => {
                 Verified (Matching)
               </h2>
               <ul className="list-disc list-inside">
-                <li>
+                <li className="list-outside">
                   The Current settings are valid, but a record with higher Max
                   Monsters exists.
                 </li>
@@ -263,7 +263,7 @@ const Form = () => {
                 </span>
                 Verified (New Record)
               </h2>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc">
                 <li>
                   The current settings are valid and will result in a new
                   record!

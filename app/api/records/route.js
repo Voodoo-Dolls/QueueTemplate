@@ -13,7 +13,7 @@ export async function GET(request) {
   try {
     const db = await createConnection("cdrecords_s3");
     const sql = `SELECT max_monsters FROM records_global WHERE mapname = "${map}" AND category = "${cat}" AND spawncycle = "${sc}" AND max_monsters >= ${mm} AND zed_type = ${zt};`;
-    // console.log(sql);
+    console.log(sql);
     const [res] = await db.query(sql);
 
     return NextResponse.json(res);
