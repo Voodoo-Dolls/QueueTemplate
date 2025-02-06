@@ -275,7 +275,7 @@ const Form = () => {
         } else {
           setRecord(
             <div className="p-4 border border-red-500 rounded-md bg-red-500 bg-opacity-10">
-              <h2 className="mb-2 font-extrabold text-red-500 text-xl flex items-center gap-2">
+              <h2 className="font-extrabold text-red-500 text-xl flex items-center gap-2">
                 <span className="text-2xl">
                   <RiCloseCircleFill />
                 </span>

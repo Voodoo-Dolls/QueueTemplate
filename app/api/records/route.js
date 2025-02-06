@@ -15,7 +15,7 @@ export async function GET(request) {
     const sql = `SELECT * FROM records_global WHERE mapname = "${map}" AND category = "${cat}" AND spawncycle = "${sc}" AND max_monsters >= ${mm} AND zed_type = ${zt};`;
     console.log(sql);
     const [res] = await db.query(sql);
-
+    // db.end();
     return NextResponse.json(res);
   } catch (error) {
     console.log(error);
