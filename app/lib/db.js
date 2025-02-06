@@ -6,8 +6,8 @@ export const createConnection = async (database) => {
   if (!connection) {
     connection = await mysql.createConnection({
       host: process.env.DB_HOST,
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      user: "mdam",
+      password: "NotaSecurePassword!",
       database: database,
     });
   }

@@ -249,7 +249,7 @@ const Form = () => {
                   The Current settings are valid, but a record with higher Max
                   Monsters exists.
                 </li>
-                <li>The Current high score is: 48</li>
+                <li>The Current high score is: </li>
                 <li>Stats will be tracked for this match</li>
               </ul>
             </div>
