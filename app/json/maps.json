@@ -4,7 +4,7 @@
     "image": "https://i.imgur.com/FR5oBYW.png"
   },
   {
-    "name": "Steam Fortress",
+    "name": "Airship",
     "image": "https://i.imgur.com/IemYWrv.png"
   },
   {
@@ -12,11 +12,11 @@
     "image": "https://i.imgur.com/K67ZgBg.png"
   },
   {
-    "name": "KF1 Wyre",
+    "name": "Wyre",
     "image": "https://i.imgur.com/ujhhzr4.png"
   },
   {
-    "name": "Zed Landing",
+    "name": "ZED Landing",
     "image": "https://i.imgur.com/282gPJP.png"
   },
   {
@@ -24,7 +24,7 @@
     "image": "https://i.imgur.com/f9hAAZQ.png"
   },
   {
-    "name": "Aperture Labs",
+    "name": "Aperture",
     "image": "https://i.imgur.com/yuxQ9nS.png"
   },
   {
@@ -32,7 +32,7 @@
     "image": "https://i.imgur.com/DAFF8AA.png"
   },
   {
-    "name": "KF1 Biohazard",
+    "name": "Biohazard",
     "image": "https://i.imgur.com/StHZedh.png"
   },
   {
@@ -40,7 +40,7 @@
     "image": "https://i.imgur.com/dQnbEUM.png"
   },
   {
-    "name": "Biotics Labs",
+    "name": "Biotics Lab",
     "image": "https://i.imgur.com/HtJrnWb.png"
   },
   {
@@ -60,7 +60,7 @@
     "image": "https://i.imgur.com/Povx0zH.png"
   },
   {
-    "name": "WHATEVER THIS MAP IS",
+    "name": "KF1 Biotics Lab",
     "image": "https://i.imgur.com/MVC6suj.png"
   },
   {
@@ -80,7 +80,7 @@
     "image": "https://i.imgur.com/9hfjpld.png"
   },
   {
-    "name": "Die Sector",
+    "name": "DieSector",
     "image": "https://i.imgur.com/e1vmlLw.png"
   },
   {
@@ -96,15 +96,15 @@
     "image": "https://i.imgur.com/jpd6kfT.png"
   },
   {
-    "name": "Farm House",
+    "name": "Farmhouse",
     "image": "https://i.imgur.com/JdijpAJ.png"
   },
   {
-    "name": "KF1 Foundry",
+    "name": "Foundry",
     "image": "https://i.imgur.com/NZKaZz1.png"
   },
   {
-    "name": "KF1 Frightyard",
+    "name": "FrightYard",
     "image": "https://i.imgur.com/f0HHGMe.png"
   },
   {
@@ -132,11 +132,11 @@
     "image": "https://i.imgur.com/4sitJiK.png"
   },
   {
-    "name": "Power Core",
+    "name": "Lockdown",
     "image": "https://i.imgur.com/mCWWC9W.png"
   },
   {
-    "name": "KF1 Manor",
+    "name": "Manor",
     "image": "https://i.imgur.com/uVuAWcb.png"
   },
   {
@@ -148,7 +148,7 @@
     "image": "https://i.imgur.com/1uzMmDe.png"
   },
   {
-    "name": "KF1 Mountain Pass",
+    "name": "Mountain Pass",
     "image": "https://i.imgur.com/HFOyIv6.png"
   },
   {
@@ -156,7 +156,7 @@
     "image": "https://i.imgur.com/ovllFVQ.png"
   },
   {
-    "name": "de_nuke",
+    "name": "Nuke",
     "image": "https://i.imgur.com/KrSAeRp.png"
   },
   {
@@ -196,7 +196,7 @@
     "image": "https://i.imgur.com/PGNI5V3.png"
   },
   {
-    "name": "Oil Spill",
+    "name": "Spillway",
     "image": "https://i.imgur.com/tE8BlBu.png"
   },
   {
@@ -224,24 +224,16 @@
     "image": "https://i.imgur.com/6blczeH.png"
   },
   {
-    "name": "Desolation (DELETE)",
-    "image": "https://i.imgur.com/bLvlo7K.png"
-  },
-  {
     "name": "Mira's Library",
     "image": "https://i.imgur.com/lwbbGGa.png"
   },
   {
-    "name": "Desolation Original",
+    "name": "Desolation",
     "image": "https://i.imgur.com/5q0O6KW.png"
   },
   {
-    "name": "Carillon Hamelet",
+    "name": "Carillon Hamlet",
     "image": "https://i.imgur.com/62rnr58.png"
-  },
-  {
-    "name": "Before Dawn (DELETE)",
-    "image": "https://i.imgur.com/ns9h49I.png"
   },
   {
     "name": "Aftermath",
@@ -264,19 +256,19 @@
     "image": "https://i.imgur.com/2Iw03GB.png"
   },
   {
-    "name": "Block Fort",
+    "name": "BlockFort",
     "image": "https://i.imgur.com/WYpeVIB.png"
   },
   {
-    "name": "Dust 1",
+    "name": "Dust",
     "image": "https://i.imgur.com/4o9wEuU.png"
   },
   {
-    "name": "Meow Remake",
+    "name": "Meow",
     "image": "https://i.imgur.com/Tl33HqP.png"
   },
   {
-    "name": "Hell Mark Station",
+    "name": "Hellmark Station",
     "image": "https://i.imgur.com/214hCkG.png"
   },
   {
@@ -284,7 +276,7 @@
     "image": "https://i.imgur.com/Rr3tuJp.png"
   },
   {
-    "name": "Bario Muerte (Update Spelling)",
+    "name": "Barrio Muerte",
     "image": "https://i.imgur.com/HgfRwGz.png"
   },
   {
@@ -294,10 +286,6 @@
   {
     "name": "Dystopia 2029",
     "image": "https://i.imgur.com/fqcuxFM.png"
-  },
-  {
-    "name": "Nuked Beta (REMOVE)",
-    "image": "https://i.imgur.com/cfsgiM0.png"
   },
   {
     "name": "Advent Bunker Down",
@@ -340,7 +328,7 @@
     "image": "https://i.imgur.com/nh54TE3.png"
   },
   {
-    "name": "CS Assault",
+    "name": "Assault",
     "image": "https://i.imgur.com/kgDuxXk.png"
   },
   {
@@ -364,11 +352,15 @@
     "image": "https://i.imgur.com/tHgVFW0.png"
   },
   {
-    "name": "KF1 Bedlam",
+    "name": "Bedlam",
     "image": "https://i.imgur.com/1cYI4z8.png"
   },
   {
     "name": "Rig Redux",
     "image": "https://i.imgur.com/LWgKfcx.png"
+  },
+  {
+    "name": "Fairfield",
+    "image": "https://i.imgur.com/ZlQzxGU.png"
   }
 ]
